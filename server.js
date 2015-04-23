@@ -115,6 +115,11 @@ var SampleApp = function() {
         self.getRoutes = { };
         self.postRoutes = { };
 
+        self.routes['/'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('index.html') );
+        };
+
         self.getRoutes['/listAll'] = function(req, res) {
             console.log("Inside listAll...");
             res.setHeader('Content-Type', 'application/json');
