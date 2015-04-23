@@ -2,7 +2,10 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var mongojs = require('mongojs');
+// var dbCon = require('./db-con/db.js');
+
 
 /**
  *  Define the sample application.
@@ -24,13 +27,24 @@ var SampleApp = function() {
         //  Set the environment variables we need.
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-
+        
         if (typeof self.ipaddress === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
             //  allows us to run/test the app locally.
             console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
         };
+
+        self.connection_string = process.env.OPENSHIFT_MONGODB_DB_URL;
+
+        // default to a 'localhost' configuration:
+        // self.connection_string = '127.0.0.1:27017/iot';
+        // if OPENSHIFT env variables are present, use the available connection info:
+        if(typeof self.connection_string === "undefined") {
+
+            console.warn('No OPENSHIFT_MONGODB_DB_URL var, using 127.0.0.1:27017');
+            self.connection_string = '127.0.0.1:27017/iot';
+        }
     };
 
 
@@ -63,6 +77,7 @@ var SampleApp = function() {
         if (typeof sig === "string") {
            console.log('%s: Received %s - terminating sample app ...',
                        Date(Date.now()), sig);
+           self.db.close();
            process.exit(1);
         }
         console.log('%s: Node server stopped.', Date(Date.now()) );
@@ -93,25 +108,25 @@ var SampleApp = function() {
      *  Create the routing table entries + handlers for the application.
      */
     self.createRoutes = function() {
-        self.routes = { };
+        self.getRoutes = { };
         self.postRoutes = { };
 
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/'] = function(req, res) {
+        self.getRoutes['/listAll'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            self.db.students.find( function(err, docs) {
+                if(err) {
+                    res.send(500);
+                }
+                else {
+                    res.json(docs);
+                }
+            });
         };
 
-        self.postRoutes['/rest-test'] = function(req, res) {
+        self.postRoutes['/student'] = function(req, res) {
+            var id = req.body.id;
             res.setHeader('Content-Type', 'application/json');
-            var test_obj = {
-                "success":true
-            }
-            res.send(test_obj);
+            res.send(req.body);
         };
     };
 
@@ -123,10 +138,14 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express.createServer();
-        self.app.use(bodyParser.urlencoded({extended:false}));
+        self.app.use(bodyParser.urlencoded({extended:true}));
+        self.app.use(bodyParser.json());
+        self.app.use(bodyParser.raw());
+        self.db = mongojs(self.connection_string, ['students']);
+
         //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
+        for (var r in self.getRoutes) {
+            self.app.get(r, self.getRoutes[r]);
         }
 
         // Add handlers for POST
@@ -171,3 +190,4 @@ var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
 
+//module.exports = db;
