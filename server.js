@@ -35,13 +35,17 @@ var SampleApp = function() {
             self.ipaddress = "127.0.0.1";
         };
 
-        self.connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + "iot";
+        
 
         // default to a 'localhost' configuration:
         // self.connection_string = '127.0.0.1:27017/iot';
         // if OPENSHIFT env variables are present, use the available connection info:
-        if(typeof self.connection_string === "undefined") {
+        if(process.env.OPENSHIFT_MONGODB_DB_URL) {
 
+            self.connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + "iot";
+            
+        }
+        else {
             console.warn('No OPENSHIFT_MONGODB_DB_URL var, using 127.0.0.1:27017');
             self.connection_string = '127.0.0.1:27017/iot';
         }
@@ -137,7 +141,7 @@ var SampleApp = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = express();
         self.app.use(bodyParser.urlencoded({extended:true}));
         self.app.use(bodyParser.json());
         self.app.use(bodyParser.raw());
