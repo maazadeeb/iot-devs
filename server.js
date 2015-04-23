@@ -116,7 +116,8 @@ var SampleApp = function() {
         self.postRoutes = { };
 
         self.getRoutes['/listAll'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
+            console.log("Inside listAll...");
+            res.setHeader('Content-Type', 'application/json');
             self.db.students.find( function(err, docs) {
                 if(err) {
                     res.send(500);
@@ -128,7 +129,8 @@ var SampleApp = function() {
         };
 
         self.postRoutes['/student'] = function(req, res) {
-            var id = req.body.id;
+            // var id = req.body.id;
+            console.log("Inside student...");
             res.setHeader('Content-Type', 'application/json');
             res.send(req.body);
         };
@@ -156,6 +158,8 @@ var SampleApp = function() {
         for (var r in self.postRoutes) {
             self.app.post(r, self.postRoutes[r]);
         }
+
+        console.log("Server initialized...");
     };
 
 
@@ -180,6 +184,7 @@ var SampleApp = function() {
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);
+            console.log('Mongo DB running on: %s', self.connection_string);
         });
     };
 
