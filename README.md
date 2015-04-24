@@ -35,6 +35,6 @@
   * Sample Request: `/student/A643`
   * Sample Body:
   ```javascript
-{"timeStamp":[1,2,3],"accelerometer":{"lowRange":{"x":[3,2,4],"y":[7,4,3],"z":[1,5,3]},"highRange":{"x":[4,2,4],"y":[8,7,6],"z":[3,5,1]}},"gsr":[23,24,5],"temperature":[32,5,2],"pressure":[4,24,54],"gyroscope":[23,435,34],"magnetometer":[3,4,2],"adc13":[324,32,2]}
+{"data":{"timeStamp":[1,2,3],"accelerometer":{"lowRange":{"x":[3,2,4],"y":[7,4,3],"z":[1,5,3]},"highRange":{"x":[4,2,4],"y":[8,7,6],"z":[3,5,1]}},"gsr":[23,24,5],"temperature":[32,5,2],"pressure":[4,24,54],"gyroscope":{"x":[3,2,4],"y":[7,4,3],"z":[1,5,3]},"magnetometer":{"x":[3,2,4],"y":[7,4,3],"z":[1,5,3]},"adc13":[324,32,2]}}
   ```
   * **VERY IMPORTANT NOTE: The data HAS to be in the same format as the sample body. Key names CANNOT differ even by a letter** 

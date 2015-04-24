@@ -188,6 +188,16 @@ var SampleApp = function() {
 
         };
 
+        // reset DB. DON'T call this unless you know what you are doing
+        self.getRoutes['/db/reset'] = function(req, res) {
+            var exec = require('child_process').exec;
+            exec('node ./db/db.js', function (error, stdout, stderr) {
+                if (!error) {
+                    res.json(successJSON);
+                }
+            });
+        };
+
         // accept data to particular Shimmer ID
         // TODO: Bad way of pushing data. Make it more modular
         self.postRoutes['/student/:id'] = function(req, res) {
@@ -229,11 +239,23 @@ var SampleApp = function() {
                         pressure: {
                             $each: sensorData.pressure
                         },
-                        gyroscope: {
-                            $each: sensorData.gyroscope
+                        'gyroscope.x': {
+                            $each: sensorData.gyroscope.x
                         },
-                        magnetometer: {
-                            $each: sensorData.magnetometer
+                        'gyroscope.y': {
+                            $each: sensorData.gyroscope.y
+                        },
+                        'gyroscope.z': {
+                            $each: sensorData.gyroscope.z
+                        },
+                        'magnetometer.x': {
+                            $each: sensorData.magnetometer.x
+                        },
+                        'magnetometer.y': {
+                            $each: sensorData.magnetometer.y
+                        },
+                        'magnetometer.z': {
+                            $each: sensorData.magnetometer.z
                         },
                         adc13: {
                             $each: sensorData.adc13
