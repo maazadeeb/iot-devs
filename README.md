@@ -15,26 +15,26 @@
 ##### URLs for testing: [OpenShift](http://iot-sniper6.rhcloud.com/),[localhost](localhost:8080/)
 
 1. **`GET` `/listAll`**  
-  * **Request Parameters**: None
-  * **Reponse**: Details of all the students
+  * Request Parameters: None
+  * Response: Details of all the students
 
 2. **`GET` `/list/{id}`**  
-  * **Request Parameters**: {id} is the Shimmer ID
-  * **Reponse**: Details of the student with Shimmer ID as {id}
+  * Request Parameters: {id} is the Shimmer ID
+  * Response: Details of the student with Shimmer ID as {id}
 
 3. **`GET` `/sensor/{id}/{sensorName}`**  
-  * **Request Parameters**: {id } is Shimmer ID, {sensorName} is the name of the sensor you need
-  * **Reponse**: Timestamp and {sensorName} data of student
-  * **Sample Request**: `/sensor/A643/gsr`
-  * **Sample Response**: `{"timeStamp":[1,2,3,1,2,3],"gsr":[23,24,5,23,24,5]}`
+  * Request Parameters: {id } is Shimmer ID, {sensorName} is the name of the sensor you need
+  * Response: Timestamp and {sensorName} data of student
+  * Sample Request: `/sensor/A643/gsr`
+  * Sample Response: `{"timeStamp":[1,2,3,1,2,3],"gsr":[23,24,5,23,24,5]}`
   * Note: To access low range accelorometer use `/sensor/A643/accelerometer.lowRange`, i.e the dot notation to go inside objects.
 
 4. **`POST` `/student/{id}`**  
-  * **Request Parameters**: {id} is the Shimmer ID, body **should** contain a **`data`** paramater as described below 
-  * **Reponse**: JSON Object telling success or failure
-  * **Sample Request**: `/student/A643`
-  * **Sample Body**:
-```javascript
+  * Request Parameters: {id} is the Shimmer ID, body **should** contain a **`data`** paramater as described below 
+  * Response: JSON Object telling success or failure
+  * Sample Request: `/student/A643`
+  * Sample Body:
+  ```javascript
 {"timeStamp":[1,2,3],"accelerometer":{"lowRange":{"x":[3,2,4],"y":[7,4,3],"z":[1,5,3]},"highRange":{"x":[4,2,4],"y":[8,7,6],"z":[3,5,1]}},"gsr":[23,24,5],"temperature":[32,5,2],"pressure":[4,24,54],"gyroscope":[23,435,34],"magnetometer":[3,4,2],"adc13":[324,32,2]}
-```
-* **VERY IMPORTANT NOTE: The data HAS to be in the same format as the sample body. Key names CANNOT differ even by a letter** 
+  ```
+  * **VERY IMPORTANT NOTE: The data HAS to be in the same format as the sample body. Key names CANNOT differ even by a letter** 
