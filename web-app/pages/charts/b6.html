@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>AdminLTE 2 | Flot Charts</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.2 -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="../../dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="skin-blue">
+    <div class="wrapper">
+      
+        <header class="main-header">
+        <!-- Logo -->
+        <a href="../../welcome.html" class="logo"><b>AutismTrack</b></a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+             <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                  <span class="hidden-xs">Teacher Admin</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <p>
+                      Teacher Admin - AutismTrack
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+               </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>Teacher Admin</p>
+
+              <a href="#"><i class="fa fa-circle text-success"></i> OnControl </a>
+            </div>
+          </div>
+          <!-- search form -->
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+        
+				   
+				   
+				      <ul class="users-list clearfix" width="10px">
+                    <li>
+                      <img src="dist/img/user1-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="pages/tables/data.php">STUDENT1</a>
+                      <span class="users-list-date">Today</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user8-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Norman</a>
+                      <span class="users-list-date">Yesterday</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user7-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Jane</a>
+                      <span class="users-list-date">12 Jan</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user6-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">John</a>
+                      <span class="users-list-date">12 Jan</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user2-160x160.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Alexander</a>
+                      <span class="users-list-date">13 Jan</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user5-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Sarah</a>
+                      <span class="users-list-date">14 Jan</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user4-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Nora</a>
+                      <span class="users-list-date">15 Jan</span>
+                    </li>
+                    <li>
+                      <img src="dist/img/user3-128x128.jpg" alt="User Image"/>
+                      <a class="users-list-name" href="#">Nadia</a>
+                      <span class="users-list-date">15 Jan</span>
+                    </li>
+                  </ul><!-- /.users-list -->
+	</section>
+        <!-- /.sidebar -->
+      </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Students Data
+            
+          </h1>
+          
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+		    <div class="box box-solid bg-light-blue-gradient">
+                <div class="box-header">
+                  <!-- tools box -->
+                   
+
+                  <i class="fa fa-map-marker"></i>
+                  <h3 class="box-title">
+                    Student Position
+                  </h3>
+                </div>
+                <div class="box-body">
+              <!--    <div id="world-map" style="height: 250px; width: 100%;"></div>     -->
+				  <div id="googleMap" style="width:100%;height:350px;"></div>
+                </div><!-- /.box-body-->
+                
+              </div>
+             
+          </div><!-- /.row -->
+ <!-- Map box -->
+    <div class="col-xs-12">
+              <!-- interactive chart -->
+              <div class="box box-primary">
+                <div class="box-header">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <h3 class="box-title">Accelometer Readings</h3>
+                  <div class="box-tools pull-right">
+                   Low range Accelometer Readings
+                    
+                  </div>
+                </div>
+                <div class="box-body">
+                  <div id="interactive" style="height: 300px;"></div>
+                </div><!-- /.box-body-->
+              </div><!-- /.box -->
+
+            </div><!-- /.col -->
+         
+             <!-- /.box -->
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Line chart -->
+              <div class="box box-primary">
+                <div class="box-header">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <h3 class="box-title">Alert Index</h3>
+                </div>
+                <div class="box-body">
+                  <div id="bar-chart" style="height: 300px;"></div>
+                </div><!-- /.box-body-->
+              </div><!-- /.box -->
+
+              <!-- Area chart -->
+              
+
+            </div><!-- /.col -->
+
+            <div class="col-md-6">
+              <!-- Bar chart -->
+              <div class="box box-primary">
+                <div class="box-header">
+                  <i class="fa fa-bar-chart-o"></i>
+					  <h3 class="box-title">Health Status</h3>
+					</div>
+                <div class="box-body">
+                  <div id="donut-chart" style="height: 300px;"></div>
+                </div><!-- /.box-body-->
+              </div><!-- /.box -->
+
+              <!-- Donut chart -->
+              
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+
+      </div><!-- /.content-wrapper -->
+     
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.3 -->
+	
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+   <script src="jquery.min.js"></script>
+   <!--  Bootstrap 3.3.2 JS -->
+    <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='../../plugins/fastclick/fastclick.min.js'></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/app.min.js" type="text/javascript"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js" type="text/javascript"></script>
+    <!-- FLOT CHARTS -->
+	 <script src="../../plugins/jQuery/jQuery-2.1.3.min.js"></script>
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="/js/flot/excanvas.min.js"></script><![endif]-->
+<script src="../../plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../plugins/flot/jquery.flot.time.js"></script>    
+<script type="text/javascript" src="../../plugins/flot/jshashtable-2.1.js"></script>    
+<script type="text/javascript" src="../../plugins/flot/jquery.numberformatter-1.2.3.min.js"></script>
+<script type="text/javascript" src="../../plugins/flot/jquery.flot.symbol.js"></script>
+<script type="text/javascript" src="../../plugins/flot/jquery.flot.axislabels.js"></script>
+     <!-- Page script -->
+	 <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <!-- FLOT CHARTS 
+    <script src="../../plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized
+    <script src="../../plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script> -->
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    <script src="../../plugins/flot/jquery.flot.pie.min.js" type="text/javascript"></script>
+    <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+    <script src="../../plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+var cpu = [], cpuCore = [], disk = [];
+var dataset;
+var totalPoints = 50;
+var updateInterval = 50;
+var k=0,t=0;
+var now = new Date().getTime();
+var itemsx=[],itemsy=[],itemsz=[],itemt=[];
+
+var options = {
+    series: {
+        lines: {
+            lineWidth: 1.2
+        }
+    },
+    xaxis: {
+        mode: "time",
+        tickSize: [10, "second"],
+        tickFormatter: function (v, axis) {
+            var date = new Date(v);
+
+            if (date.getSeconds() % 10 == 0) {
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = 	date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+                return hours + ":" + minutes + ":" + seconds;
+				t=k;
+				//return itemt[k];
+            } else {
+                //return itemt[k];
+            }
+			
+        },
+        axisLabel: "Time",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+    yaxes: 
+        {
+            min: -500,
+            max: 500,
+         /*   tickSize: 5,
+            tickFormatter: function (v, axis) {
+                if (v % 10 == 0) {
+                    return v + "%";
+                } else {
+                    return "";
+                }
+            },*/
+            axisLabel: "CPU loading",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Verdana, Arial',
+            axisLabelPadding: 6
+        }				
+    ,
+    legend: {
+        noColumns: 0,
+        position:"nw"
+    },
+    grid: {      
+        backgroundColor: { colors: ["#ffffff", "#EDF5FF"] }
+    }
+};
+
+function initData() {
+
+$.getJSON( "/sensor/A643/accelerometer.lowRange", null,function( d ) {
+		 $.each( d, function( key, val ) {
+		 if(key=="timeStamp")   
+   itemt=val;
+		$.each( val, function( key, value ) {
+		$.each( value, function( key, vall ) {
+		if(key=='x')
+			itemsx=vall;
+		if(key=='y')
+			itemsy=vall;
+		if(key=='z')
+			itemsz=vall;
+		}) 
+		})
+		});
+		//alert("got data "+items[4]+" and also "+d.accelerometer.highRange.x[0]);
+		});
+    for (var i = 0; i < totalPoints; i++) {
+        //var temp = [now += updateInterval, 0];
+var temp;
+now += updateInterval;
+k++;
+    temp = [now, Number(itemsx[k])];
+    cpu.push(temp);
+
+    temp = [now, Number(itemsy[k])];
+    cpuCore.push(temp);
+
+    temp = [now, Number(itemsz[k])];
+    disk.push(temp);
+    }
+}
+
+
+
+function update() {
+
+    cpu.shift();
+    cpuCore
+	.shift();
+    disk.shift();
+
+    now += updateInterval
+if(k%totalPoints==0)
+{
+$.getJSON( "/sensor/A643/accelerometer.lowRange", null,function( d ) {
+		 $.each( d, function( key, val ) {
+		 if(key=="timeStamp")   
+   itemt=val;
+		$.each( val, function( key, value ) {
+		$.each( value, function( key, vall ) {
+		if(key=='x')
+			itemsx=vall;
+		if(key=='y')
+			itemsy=vall;
+		if(key=='z')
+			itemsz=vall;
+		}) 
+		})
+		});
+		//alert("got data "+items[4]+" and also "+d.accelerometer.highRange.x[0]);
+		});
+}
+var temp;
+   now += updateInterval;
+k++;
+    temp = [now, Number(itemsx[k])];
+    cpu.push(temp);
+
+    temp = [now, Number(itemsy[k])];
+    cpuCore.push(temp);
+
+    temp = [now, Number(itemsz[k])%16500];
+    disk.push(temp);
+    
+
+  dataset = [        
+        { label: "X", data: cpu, lines:{fill:false, lineWidth:1.2}, color: "#00FF00" }
+		,
+        { label: "Z", data: disk,lines:{fill:false, lineWidth:1.2}, color: "#0044FF"},
+        { label: "Y", data: cpuCore, lines: { lineWidth: 1.2}, color: "#FF0000" }
+    ];
+
+    $.plot($("#interactive"), dataset, options);
+    setTimeout(update, updateInterval);
+}
+
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(12.9667,77.5667),
+    zoom:20,
+    mapTypeId:google.maps.MapTypeId.HYBRID
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  
+   var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(12.9667,77.5667),
+      map: map,
+      title: 'Student 1'
+  });
+  
+}
+
+function labelFormatter(label, series) {
+        return "<div style='font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;'>"
+                + label
+                + "<br/>"
+                + Math.round(series.percent) + "%</div>";
+      }
+	  
+var donutData=[];	  
+function getdonutdata(){
+
+
+
+
+
+donutData = [
+          {label: "Critical", data: 50, color: "#FF0000"},
+          {label: "Warning", data: 20, color: "#FFFF00"},
+          {label: "Normal", data: 30, color: "#00FF00"}
+        ];
+
+}
+ var bar_data =[];
+function getbardata(){
+
+        bar_data = {
+          data: [["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9]],
+          color: "#3c8dbc"
+        };
+
+
+}
+
+
+$(document).ready(function () {
+    initData();
+
+
+  //  $.plot($("#flot-placeholder1"), dataset, options);
+    setTimeout(update, updateInterval);
+	
+
+google.maps.event.addDomListener(window, 'load', initialize);	
+
+    
+ getdonutdata();
+        $.plot("#donut-chart", donutData, {
+          series: {
+            pie: {
+              show: true,
+              radius: 1,
+              innerRadius: 0.5,
+              label: {
+                show: true,
+                radius: 2 / 3,
+                formatter: labelFormatter,
+                threshold: 0.1
+              }
+
+            }
+          },
+          legend: {
+            show: false
+          }
+        });
+        /*
+         * END DONUT CHART
+         */
+
+		 getbardata();
+		  $.plot("#bar-chart", [bar_data], {
+          grid: {
+            borderWidth: 1,
+            borderColor: "#f3f3f3",
+            tickColor: "#f3f3f3"
+          },
+          series: {
+            bars: {
+              show: true,
+              barWidth: 0.5,
+              align: "center"
+            }
+          },
+          xaxis: {
+            mode: "categories",
+            tickLength: 0
+          }
+        });
+		
+		 
+
+
+});    
+ </script>
+  </body>
+</html>
