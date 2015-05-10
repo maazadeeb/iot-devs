@@ -218,7 +218,7 @@ else:
 				
 				#fout.close()
 				print "All done"
-				#r = requests.post('http://iot-sniper6.rhcloud.com/student/'+sys.argv[2], data = postData)
+				r = requests.post('http://localhost:8080/student/'+sys.argv[2], data = postData)
 				start_time += 10
 				print "else"
 				jdata = {"timeStamp":[],"accelerometer":{"lowRange":{"x":[],"y":[],"z":[]},"highRange":{"x":[],"y":[],"z":[]}},"gsr":[],"temperature":[],"pressure":[],"gyroscope":{"x":[],"y":[],"z":[]},"magnetometer":{"x":[],"y":[],"z":[]},"adc13":[]}

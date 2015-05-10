@@ -28,7 +28,7 @@
       
         <header class="main-header">
         <!-- Logo -->
-        <a href="../../welcome.html" class="logo"><b>AutismTrack</b></a>
+        <a href="../../" class="logo"><b>AutismTrack</b></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -64,7 +64,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p>Teacher Admin</p>
@@ -76,49 +76,59 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
         
-				   
+				                <div class="box box-primary">
+                <div class="box-header">
+                  <i class="fa fa-bar-chart-o"></i>
+					  <h3 class="box-title">Alert Status</h3>
+					</div>
+                <div class="box-body">
+                  <div id="alertchart" style="height: 300px;"></div>
+                </div><!-- /.box-body-->
+              </div><!-- /.box --> 
 				   
 				      <ul class="users-list clearfix" width="10px">
                     <li>
-                      <img src="dist/img/user1-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user1-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="pages/tables/data.php">STUDENT1</a>
                       <span class="users-list-date">Today</span>
                     </li>
                     <li>
-                      <img src="dist/img/user8-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user8-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Norman</a>
                       <span class="users-list-date">Yesterday</span>
                     </li>
                     <li>
-                      <img src="dist/img/user7-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user7-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Jane</a>
                       <span class="users-list-date">12 Jan</span>
                     </li>
                     <li>
-                      <img src="dist/img/user6-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user6-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">John</a>
                       <span class="users-list-date">12 Jan</span>
                     </li>
                     <li>
-                      <img src="dist/img/user2-160x160.jpg" alt="User Image"/>
+                      <img src="/dist/img/user2-160x160.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Alexander</a>
                       <span class="users-list-date">13 Jan</span>
                     </li>
                     <li>
-                      <img src="dist/img/user5-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user5-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Sarah</a>
                       <span class="users-list-date">14 Jan</span>
                     </li>
                     <li>
-                      <img src="dist/img/user4-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user4-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Nora</a>
                       <span class="users-list-date">15 Jan</span>
                     </li>
                     <li>
-                      <img src="dist/img/user3-128x128.jpg" alt="User Image"/>
+                      <img src="/dist/img/user3-128x128.jpg" alt="User Image"/>
                       <a class="users-list-name" href="#">Nadia</a>
                       <span class="users-list-date">15 Jan</span>
                     </li>
+					
+
                   </ul><!-- /.users-list -->
 	</section>
         <!-- /.sidebar -->
@@ -248,18 +258,19 @@
     <script src="../../plugins/flot/jquery.flot.pie.min.js" type="text/javascript"></script>
     <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
     <script src="../../plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
-
-
     <script type="text/javascript">
 
 var cpu = [], cpuCore = [], disk = [];
 var dataset;
 var totalPoints = 50;
 var updateInterval = 50;
-var k=0,t=0;
+var updateInterval2 = 100;
+var alertData;
+var gwindow = 50;
+var k=0,t=0,m=0;
 var now = new Date().getTime();
 var itemsx=[],itemsy=[],itemsz=[],itemt=[];
-
+var ucall;
 var options = {
     series: {
         lines: {
@@ -268,19 +279,20 @@ var options = {
     },
     xaxis: {
         mode: "time",
-        tickSize: [10, "second"],
+        tickSize: [5, "second"],
         tickFormatter: function (v, axis) {
             var date = new Date(v);
 
-            if (date.getSeconds() % 10 == 0) {
+            if (date.getSeconds() % 5 == 0) {
                 var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
                 var minutes = 	date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
                 var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
-                return hours + ":" + minutes + ":" + seconds;
-				t=k;
+                return hours + ":" + minutes + ":" + seconds + "--" +m +"--"+k;
+				//t=k;
 				//return itemt[k];
             } else {
+			return "";
                 //return itemt[k];
             }
 			
@@ -336,20 +348,25 @@ $.getJSON( "/sensor/A643/accelerometer.lowRange", null,function( d ) {
 		}) 
 		})
 		});
+		if(itemsx.length> gwindow )
+			m= itemsx.length - gwindow;
+		ucall=itemsx.length;
 		//alert("got data "+items[4]+" and also "+d.accelerometer.highRange.x[0]);
 		});
-    for (var i = 0; i < totalPoints; i++) {
+    for (var i = 0; i < totalPoints; i++)
+  {
         //var temp = [now += updateInterval, 0];
 var temp;
 now += updateInterval;
 k++;
-    temp = [now, Number(itemsx[k])];
+m++;
+    temp = [itemt[m], Number(itemsx[m])];
     cpu.push(temp);
 
-    temp = [now, Number(itemsy[k])];
+    temp = [itemt[m], Number(itemsy[m])];
     cpuCore.push(temp);
 
-    temp = [now, Number(itemsz[k])];
+    temp = [itemt[m], Number(itemsz[m])];
     disk.push(temp);
     }
 }
@@ -364,12 +381,13 @@ function update() {
     disk.shift();
 
     now += updateInterval
-if(k%totalPoints==0)
-{
+if(k%50==0)
+{//alert("called");
+//console.log("before call m= "+m);
 $.getJSON( "/sensor/A643/accelerometer.lowRange", null,function( d ) {
 		 $.each( d, function( key, val ) {
 		 if(key=="timeStamp")   
-   itemt=val;
+		itemt=val;
 		$.each( val, function( key, value ) {
 		$.each( value, function( key, vall ) {
 		if(key=='x')
@@ -381,19 +399,32 @@ $.getJSON( "/sensor/A643/accelerometer.lowRange", null,function( d ) {
 		}) 
 		})
 		});
+		//console.log("after call m= "+m);
+		if(itemsx.length==ucall )
+			console.log("unnecessar call");
+		else{
+		ucall=itemsx.length;
+	console.log("success call");
+		}
+	//		m= itemsx.length - gwindow;
 		//alert("got data "+items[4]+" and also "+d.accelerometer.highRange.x[0]);
 		});
 }
-var temp;
+	if(m>=itemsx.length)
+		{	m= itemsx.length - gwindow;
+	console.log("no data");
+	}//console.log(m);
+var temp,t;
    now += updateInterval;
 k++;
-    temp = [now, Number(itemsx[k])];
+m++;
+    temp = [now, Number(itemsx[m])];
     cpu.push(temp);
 
-    temp = [now, Number(itemsy[k])];
+    temp = [now, Number(itemsy[m])];
     cpuCore.push(temp);
 
-    temp = [now, Number(itemsz[k])%16500];
+    temp = [now, Number(itemsz[m])];
     disk.push(temp);
     
 
@@ -406,6 +437,48 @@ k++;
 
     $.plot($("#interactive"), dataset, options);
     setTimeout(update, updateInterval);
+}
+
+
+
+function update2()
+{
+
+//alert("update 2 called");
+
+	alertData = [{label: "Critical", data: 100, color: "#FF0000"}];
+	$.getJSON( "/a.html", null,function( ad ) {
+		 $.each( ad, function( key, val ) {
+		// console.log("value is"+ val);
+		if (val=='T')
+			{alertData = [{label: "Critical", data: 100, color: "#FF0000"}];}//console.log("value is inside if "+ val);}
+		else
+			{alertData = [{label: "Normal", data: 100, color: "#00FF00"}];}//console.log("value is inside else "+ val);}
+		});
+	//		m= itemsx.length - gwindow;
+		//alert("got data "+items[4]+" and also "+d.accelerometer.highRange.x[0]);
+			
+    $.plot($("#alertchart"), alertData, {
+          series: {
+            pie: {
+              show: true,
+              radius: 1,
+              innerRadius: 0.5,
+              label: {
+                show: true,
+                radius: 2 / 3,
+                formatter: labelFormatter,
+                threshold: 0.1
+              }
+
+            }
+          },
+          legend: {
+            show: false
+          }
+        });
+        });
+setTimeout(update2,updateInterval2);
 }
 
 function initialize() {
@@ -463,9 +536,9 @@ $(document).ready(function () {
 
   //  $.plot($("#flot-placeholder1"), dataset, options);
     setTimeout(update, updateInterval);
-	
+	setTimeout(update2, updateInterval2);
 
-google.maps.event.addDomListener(window, 'load', initialize);	
+
 
     
  getdonutdata();
@@ -488,7 +561,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
             show: false
           }
         });
-        /*
+		
+		/*
          * END DONUT CHART
          */
 
@@ -512,7 +586,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
           }
         });
 		
-		 
+		 google.maps.event.addDomListener(window, 'load', initialize);	
 
 
 });    
